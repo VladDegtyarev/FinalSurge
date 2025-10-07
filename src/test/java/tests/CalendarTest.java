@@ -33,7 +33,7 @@ public class CalendarTest extends BaseTest {
     @Description("Проверка удаления тренировки")
     public void checkDeleteWorkout() {
         QuickWorkout quickWorkout = QuickWorkout.builder()
-                .date("13/10/2025")
+                .date("19/10/2025")
                 .type("Swim")
                 .text("Run")
                 .distance("8")
