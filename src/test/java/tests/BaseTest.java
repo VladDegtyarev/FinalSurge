@@ -4,6 +4,8 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import listners.TestListener;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.CalendarPage;
@@ -11,6 +13,8 @@ import pages.LoginPage;
 import pages.LogoutPage;
 import pages.SettingPage;
 import utils.PropertyReader;
+
+import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -30,6 +34,8 @@ public class BaseTest {
         Configuration.clickViaJs = true;
         Configuration.headless = true;
         Configuration.browserSize = "1920x1080";
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
         loginPage = new LoginPage();
         settingPage = new SettingPage();
         calendarPage = new CalendarPage();
@@ -38,5 +44,9 @@ public class BaseTest {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
         );
+    }
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        closeWebDriver();
     }
 }
