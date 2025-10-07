@@ -31,17 +31,13 @@ public class BaseTest {
     public void setUp(@Optional("chrome") String browser) {
         if((browser.equalsIgnoreCase("chrome"))){
             Configuration.browser = "chrome";
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--incognito");
         }else if((browser.equalsIgnoreCase("firefox"))){
             Configuration.browser = "firefox";
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("--incognito");
         }
         Configuration.baseUrl = "https://log.finalsurge.com";
         Configuration.timeout = 40000;
         Configuration.clickViaJs = true;
-        //Configuration.headless = true;
+        Configuration.headless = true;
         Configuration.browserSize = "1600x900";
         loginPage = new LoginPage();
         settingPage = new SettingPage();
