@@ -132,7 +132,7 @@ public class CalendarPage {
     }
 
     public CalendarPage checkWorkoutDetails(String day){
-        SelenideElement element = $x(WORKOUT_DETAILS);
+        SelenideElement element  = $x(WORKOUT_DETAILS);
         Assert.assertEquals(element.getText(),day);
         return this;
     }
