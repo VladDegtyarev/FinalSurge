@@ -75,9 +75,9 @@ public class CalendarTest extends BaseTest {
                 .checkWorkoutDetails("Monday, October 13, 2025");
     }
 
-    @Test(testName = "Удаления тренировки ",
-            description = "Проверка удаления тренировки")
-    @Description("Проверка удаления тренировки")
+    @Test(testName = "Копирование тренировки ",
+            description = "Проверка копирования тренировки")
+    @Description("Проверка копирования тренировки")
     public void checkCopyWorkout() {
         QuickWorkout quickWorkout = QuickWorkout.builder()
                 .date("5/10/2025")
@@ -137,7 +137,7 @@ public class CalendarTest extends BaseTest {
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
-                .checkErrorMassage("×\n" +
+                .checkErrorMassage ("×\n" +
                         "Please fix the following errors:\n" +
                         "*Please select a valid Activity Type.");
     }
