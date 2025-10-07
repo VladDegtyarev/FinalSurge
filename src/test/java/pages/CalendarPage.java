@@ -15,45 +15,41 @@ import static org.testng.AssertJUnit.assertEquals;
 @Log4j2
 public class CalendarPage {
     private final String SETTING_BUTTON = "//*[normalize-space(text())='Settings']";
-    private final String PLUS_BUTTON="//*[@data-day=%s]//descendant::*[@class='icon-plus']";
-    private final String DAY_DROPDOWN_MENU="//ul[@role='menu']//" +
+    private final String PLUS_BUTTON = "//*[@data-day=%s]//descendant::*[@class='icon-plus']";
+    private final String DAY_DROPDOWN_MENU = "//ul[@role='menu']//" +
             "descendant::*[normalize-space(text())='%s'and @data-day='%s']";
-    private final String SAVE_BUTTON="//*[@id='saveButton']";
-    private final String CALENDAR_DAY="//*[@data-day=%s]";
-    private final String CALENDAR_WORKOUT="//div[@data-day=%s]//descendant::div[contains(text(),'%s')]";
-    private final String WORKOUT_DROPDOWN_MENU="//*[@class='dropdown-menu pull-right']//" +
+    private final String SAVE_BUTTON = "//*[@id='saveButton']";
+    private final String CALENDAR_DAY = "//*[@data-day=%s]";
+    private final String CALENDAR_WORKOUT = "//div[@data-day=%s]//descendant::div[contains(text(),'%s')]";
+    private final String WORKOUT_DROPDOWN_MENU = "//*[@class='dropdown-menu pull-right']//" +
             "descendant::*[contains(text(),'%s')]";
-    private final String DELETE_BUTTON="//*[@class='btn btn-primary']";
-    private final String WORKOUT_DETAILS="//small[@class='muted']";
-    private final String QUICK_WORKOUT_BUTTON="//a[@id='QuickAddToggle']";
-    private final String CALENDAR_MONTH="//a[@id='dpMonth']";
-    private final String MONTH="//table[@class='table-condensed']//span[@class='month'and normalize-space(text())='%s']";
+    private final String DELETE_BUTTON = "//*[@class='btn btn-primary']";
+    private final String WORKOUT_DETAILS = "//small[@class='muted']";
+    private final String QUICK_WORKOUT_BUTTON = "//a[@id='QuickAddToggle']";
+    private final String CALENDAR_MONTH = "//a[@id='dpMonth']";
+    private final String MONTH = "//table[@class='table-condensed']//span[@class='month'and normalize-space(text())='%s']";
     private final String LOGOUT_BUTTON = "//*[normalize-space(text())='Logout']";
-    private final String ERROR_MASSAGE="div.alert.alert-error";
+    private final String ERROR_MASSAGE = "div.alert.alert-error";
 
-
-
-
-
-    public  void checkErrorMassage(String error) {
+    public void checkErrorMassage(String error) {
         SelenideElement element = $(ERROR_MASSAGE);
         assertEquals(element.getText(), error);
     }
 
     @Step("Выбор месяца :'{shortMonth}'")
-        public CalendarPage selectMonth(String shortMonth){
-            log.info("Select Month : {}",shortMonth);
+    public CalendarPage selectMonth(String shortMonth) {
+        log.info("Select Month : {}", shortMonth);
         $x(CALENDAR_MONTH).click();
-        $$x(String.format(MONTH,shortMonth))
+        $$x(String.format(MONTH, shortMonth))
                 .findBy(visible)
                 .shouldBe(visible)
                 .click();
         return this;
     }
 
-    public CalendarPage checkSelectedMonth(String month){
-        SelenideElement element= $x(CALENDAR_MONTH);
-        Assert.assertEquals(element.getText(),month);
+    public CalendarPage checkSelectedMonth(String month) {
+        SelenideElement element = $x(CALENDAR_MONTH);
+        Assert.assertEquals(element.getText(), month);
         return this;
     }
 
@@ -65,48 +61,48 @@ public class CalendarPage {
     }
 
     @Step("Перейти в настройки")
-    public SettingPage openSetting(){
+    public SettingPage openSetting() {
         log.info("Click Setting button");
         $x(SETTING_BUTTON).click();
         return new SettingPage();
     }
 
     @Step("Нажать Logout")
-    public LogoutPage clickLogout(){
+    public LogoutPage clickLogout() {
         log.info("Click Logout button");
         $x(LOGOUT_BUTTON).click();
         return new LogoutPage();
     }
-@Step("Добавить быструю тренировку")
-    public CalendarPage addWorkoutQuick(QuickWorkout quickWorkout){
-        log.info("Add quick workout : {}",quickWorkout.getType());
+
+    @Step("Добавить быструю тренировку")
+    public CalendarPage addWorkoutQuick(QuickWorkout quickWorkout) {
+        log.info("Add quick workout : {}", quickWorkout.getType());
         new Input("Date").write(quickWorkout.getDate());
         new PickList("ActivityType").select(quickWorkout.getType());
         new Input("Workout Name").write(quickWorkout.getText());
         new Input("Distance").write(quickWorkout.getDistance());
         new PickList("DistType").select(quickWorkout.getDistType());
-
         return this;
     }
 
     @Step("Нажать Save")
-    public CalendarPage save(){
+    public CalendarPage save() {
         log.info("Click Save button");
         $x(SAVE_BUTTON).click();
         return this;
     }
 
     @Step("Открыть меню тренеровки")
-    public CalendarPage openWorkoutDropdown(String day,String workout){
+    public CalendarPage openWorkoutDropdown(String day, String workout) {
         log.info("Open workout dropdown");
-        $x(String.format(CALENDAR_WORKOUT,day,workout)).click();
+        $x(String.format(CALENDAR_WORKOUT, day, workout)).click();
         return this;
     }
 
     @Step("Выбрать :'{option}'")
-    public CalendarPage selectWorkoutDropdown(String option){
-        log.info("Open dropdown menu and select : {}",option);
-        $$x(String.format(WORKOUT_DROPDOWN_MENU,option))
+    public CalendarPage selectWorkoutDropdown(String option) {
+        log.info("Open dropdown menu and select : {}", option);
+        $$x(String.format(WORKOUT_DROPDOWN_MENU, option))
                 .findBy(visible)
                 .shouldBe(visible)
                 .click();
@@ -115,45 +111,45 @@ public class CalendarPage {
     }
 
     @Step("Удалить тренеровку")
-    public CalendarPage deleteWorkout(){
+    public CalendarPage deleteWorkout() {
         log.info("Delete workout");
         $x(DELETE_BUTTON).click();
         return this;
     }
 
-    public CalendarPage checkDeletedWorkout(String day,String workout){
-        $x(String.format(CALENDAR_WORKOUT,day,workout)).shouldNot(visible);
+    public CalendarPage checkDeletedWorkout(String day, String workout) {
+        $x(String.format(CALENDAR_WORKOUT, day, workout)).shouldNot(visible);
         return this;
     }
 
-    public CalendarPage checkCreateWorkout(String day,String workout){
-        $x(String.format(CALENDAR_WORKOUT,day,workout)).shouldBe(visible);
+    public CalendarPage checkCreateWorkout(String day, String workout) {
+        $x(String.format(CALENDAR_WORKOUT, day, workout)).shouldBe(visible);
         return this;
     }
 
-    public CalendarPage checkWorkoutDetails(String day){
-        SelenideElement element  = $x(WORKOUT_DETAILS);
-        Assert.assertEquals(element.getText(),day);
+    public CalendarPage checkWorkoutDetails(String day) {
+        SelenideElement element = $x(WORKOUT_DETAILS);
+        Assert.assertEquals(element.getText(), day);
         return this;
     }
 
     @Step("Нажать Quick Add")
-    public CalendarPage openAddQuickWorkout(){
+    public CalendarPage openAddQuickWorkout() {
         log.info("Click Quick workout button");
         $x(QUICK_WORKOUT_BUTTON).click();
         return this;
     }
 
     @Step("Переместить тренеровку с '{day}' на '{newDay}'")
-    public CalendarPage moveWorkout(String day,String workout,String newDay){
-        log.info("moving the workout from {} to {}",day,newDay);
-        SelenideElement originalDay = $x(String.format(CALENDAR_WORKOUT,day,workout));
-        SelenideElement moveDay=$x(String.format(CALENDAR_DAY,newDay));
+    public CalendarPage moveWorkout(String day, String workout, String newDay) {
+        log.info("moving the workout from {} to {}", day, newDay);
+        SelenideElement originalDay = $x(String.format(CALENDAR_WORKOUT, day, workout));
+        SelenideElement moveDay = $x(String.format(CALENDAR_DAY, newDay));
         actions().clickAndHold(originalDay)
                 .moveToElement(moveDay)
                 .release()
                 .perform();
         return this;
     }
-
 }
+

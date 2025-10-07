@@ -9,9 +9,9 @@ public class LogoutTest extends BaseTest {
             description = "Проверка выхода из акаунта")
     @Description("Проверка выхода из акаунта")
     @Owner("Degtyarev Vlad")
-    public void checkLogout(){
+    public void checkLogout() {
         loginPage.openPage()
-                .login(user,password)
+                .login(user, password)
                 .waitTillOpened()
                 .clickLogout()
                 .checkLogout("Account Logout");

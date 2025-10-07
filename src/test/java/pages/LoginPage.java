@@ -16,16 +16,16 @@ public class LoginPage {
     private final String ERROR_MASSAGE = "//div[@class='alert alert-error']";
     private final String EMAIL_MASSAGE = "//label[@class='error']";
 
-@Step("Открыть страницу")
+    @Step("Открыть страницу")
     public LoginPage openPage() {
-    log.info("Open the Login page");
+        log.info("Open the Login page");
         open("/login");
         return this;
     }
 
-@Step("Страница Login открыта")
+    @Step("Страница Login открыта")
     public LoginPage waitTillOpened() {
-    log.info("Page Login is open");
+        log.info("Page Login is open");
         $x(USER_FIELD);
         return this;
     }
@@ -43,11 +43,9 @@ public class LoginPage {
     }
 
     public String checkErrorMessage() {
-        SelenideElement error=  $x(EMAIL_MASSAGE);
+        SelenideElement error = $x(EMAIL_MASSAGE);
         error.shouldBe(visible);
-       return error.getText();
-
+        return error.getText();
     }
-
-
 }
+

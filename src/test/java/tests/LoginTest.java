@@ -9,7 +9,7 @@ import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
     @Test(testName = "Проверка входа с позитивными даннами",
-            description ="Проверка входа  в аккаунт позитивными даннами" )
+            description = "Проверка входа  в аккаунт позитивными даннами")
     @Description("Проверка входа  в аккаунт позитивными даннами")
     @Owner("Degtyarev Vlad")
     public void checkPositiveLogin() {
@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test(testName = "Проверка входа с негативными даннами",
-            description ="Проверка входа  в аккаунт негативными даннами" )
+            description = "Проверка входа  в аккаунт негативными даннами")
     @Description("Проверка входа  в аккаунт негативными даннами")
     @Owner("Degtyarev Vlad")
     public void checkLoginWithNegativeCred() {
@@ -32,7 +32,7 @@ public class LoginTest extends BaseTest {
 
     @DataProvider(name = "Проверка логина с негативными данными")
     public Object[][] loginData() {
-        return new Object[][] {
+        return new Object[][]{
                 {"test@gmail.com", "", "Please enter a password."},
                 {"test", "test", "Please enter a valid email address."},
                 {"", "password", "Please enter your e-mail address."},
@@ -43,10 +43,10 @@ public class LoginTest extends BaseTest {
     @Test(dataProvider = "Проверка логина с негативными данными")
     @Description("Проверка входа  в аккаунт негативными даннами")
     @Owner("Degtyarev Vlad")
-    public void paramNegativeTest(String user,String password,String expectedErrorMessage){
+    public void paramNegativeTest(String user, String password, String expectedErrorMessage) {
         loginPage.openPage();
-        loginPage.login(user,password);
-        assertEquals(loginPage.checkErrorMessage(),expectedErrorMessage,"Сообщение об ошибки не соответсвует");
+        loginPage.login(user, password);
+        assertEquals(loginPage.checkErrorMessage(), expectedErrorMessage, "Сообщение об ошибки не соответсвует");
 
     }
 }

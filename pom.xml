@@ -12,7 +12,7 @@
     <allure.version>2.24.0</allure.version>
     <testng.version>7.11.0</testng.version>
     <lombok.version>1.18.38</lombok.version>
-    <selenide.version>7.10.0</selenide.version>
+    <selenide.version>7.11.1</selenide.version>
     <log4j-core.version>2.24.2</log4j-core.version>
     <jackson.version>2.12.3</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>

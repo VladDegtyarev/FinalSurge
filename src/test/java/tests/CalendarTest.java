@@ -26,7 +26,6 @@ public class CalendarTest extends BaseTest {
                 .addWorkoutQuick(quickWorkout)
                 .save()
                 .checkCreateWorkout("8", "Swim");
-
     }
 
     @Test(testName = "Удаление тренировки ",
@@ -137,7 +136,7 @@ public class CalendarTest extends BaseTest {
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
-                .checkErrorMassage ("×\n" +
+                .checkErrorMassage("×\n" +
                         "Please fix the following errors:\n" +
                         "*Please select a valid Activity Type.");
     }

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class SettingTest extends BaseTest {
     @Test(testName = "Проверка редактирования профеля",
-    description = "Проверка редактирования профеля пользователя")
+            description = "Проверка редактирования профеля пользователя")
     @Description("Проверка редактирования профеля пользователя")
     @Owner("Degtyarev Vlad")
     public void checkEditProfile() {
@@ -28,7 +28,7 @@ public class SettingTest extends BaseTest {
                 .openSetting()
                 .waitTillOpened()
                 .editProfile(accountBuilder)
-                        .saveEdit();
+                .saveEdit();
         settingPage.check("Country", "Belarus");
         settingPage.check("Gender", "Male");
     }
@@ -51,46 +51,48 @@ public class SettingTest extends BaseTest {
                 .openSetting()
                 .waitTillOpened()
                 .editSettings(userSettings)
-                        .saveEdit();
+                .saveEdit();
         settingPage.check("Primary Sport", "Swimming");
         settingPage.check("Time Display", "24 hour");
     }
+
     @Test(testName = "Проверка перехода в настройки профиля",
             description = "Проверка перехода в настройки профиля")
     @Description("Проверка перехода в настройки профиля")
     @Owner("Degtyarev Vlad")
-    public void checkOpenSettingPage(){
+    public void checkOpenSettingPage() {
         loginPage.openPage()
-                .login(user,password)
+                .login(user, password)
                 .waitTillOpened()
                 .openSetting()
                 .checkOpenedPage("Edit Profile");
 
     }
+
     @Test(testName = "Сохранения профиля с пустым именем",
             description = "Проверка отоброжения ошибки при сохранении профиля с пустым именем ")
     @Description("Проверка отоброжения ошибки при сохранении профиля с пустым именем")
     @Owner("Degtyarev Vlad")
     public void checkEditProfileWithEmptyName() {
-    Account accountBuilder = Account.builder()
-            .name(" ")
-            .sex("Male")
-            .country("Belarus")
-            .weight("70")
-            .typeWeight("kg")
-            .LName("Degtyarev")
-            .region("Vitsyebskaya voblasts")
-            .build();
-    loginPage.openPage()
-            .waitTillOpened()
-            .login(user, password)
-            .waitTillOpened()
-            .openSetting()
-            .waitTillOpened()
-            .editProfile(accountBuilder)
-            .saveEdit()
-            .checkErrorMassage("×\n" +
-                    "Please fix the following errors:\n" +
-                    "*Please enter a value for First Name.");
-}
+        Account accountBuilder = Account.builder()
+                .name(" ")
+                .sex("Male")
+                .country("Belarus")
+                .weight("70")
+                .typeWeight("kg")
+                .LName("Degtyarev")
+                .region("Vitsyebskaya voblasts")
+                .build();
+        loginPage.openPage()
+                .waitTillOpened()
+                .login(user, password)
+                .waitTillOpened()
+                .openSetting()
+                .waitTillOpened()
+                .editProfile(accountBuilder)
+                .saveEdit()
+                .checkErrorMassage("×\n" +
+                        "Please fix the following errors:\n" +
+                        "*Please enter a value for First Name.");
+    }
 }
