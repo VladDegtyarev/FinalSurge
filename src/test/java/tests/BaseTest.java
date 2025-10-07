@@ -3,18 +3,20 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
-import listners.PropertyReader;
+import utils.PropertyReader;
 import listners.TestListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.CalendarPage;
 import pages.LoginPage;
+import pages.LogoutPage;
 import pages.SettingPage;
 @Listeners(TestListener.class)
 public class BaseTest {
     LoginPage loginPage;
     SettingPage settingPage;
     CalendarPage calendarPage;
+    LogoutPage logoutPage;
 
     String user = System.getProperty("user", PropertyReader.getProperty("user"));
     String password = System.getProperty("password", PropertyReader.getProperty("password"));
@@ -30,6 +32,7 @@ public class BaseTest {
         loginPage=new LoginPage();
         settingPage=new SettingPage();
         calendarPage= new CalendarPage();
+        logoutPage=new LogoutPage();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)

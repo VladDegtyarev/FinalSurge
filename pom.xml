@@ -10,11 +10,19 @@
 
 <properties>
     <allure.version>2.24.0</allure.version>
+    <testng.version>7.11.0</testng.version>
+    <lombok.version>1.18.38</lombok.version>
+    <selenide.version>7.10.0</selenide.version>
+    <log4j-core.version>2.24.2</log4j-core.version>
+    <jackson.version>2.12.3</jackson.version>
+    <javafaker.version>1.0.2</javafaker.version>
+    <allure-selenide.version>2.30.0</allure-selenide.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <aspectj.version>1.9.20.1</aspectj.version>
 </properties>
+
 <dependencyManagement>
     <dependencies>
         <dependency>
@@ -26,29 +34,30 @@
         </dependency>
     </dependencies>
 </dependencyManagement>
+
 <dependencies><!-- https://mvnrepository.com/artifact/org.testng/testng -->
     <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>
-        <version>7.11.0</version>
+        <version>${testng.version}</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
-        <version>1.18.38</version>
+        <version>${lombok.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.24.2</version>
+        <version>${log4j-core.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
     <dependency>
         <groupId>com.codeborne</groupId>
         <artifactId>selenide</artifactId>
-        <version>7.10.0</version>
+        <version>${selenide.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
     <dependency>
@@ -59,20 +68,21 @@
     <dependency>
         <groupId>com.fasterxml.jackson.dataformat</groupId>
         <artifactId>jackson-dataformat-yaml</artifactId>
-        <version>2.12.3</version>
+        <version>${jackson.version}</version>
     </dependency>
     <dependency>
         <groupId>com.github.javafaker</groupId>
         <artifactId>javafaker</artifactId>
-        <version>1.0.2</version>
+        <version>${javafaker.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-selenide -->
     <dependency>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-selenide</artifactId>
-        <version>2.30.0</version>
+        <version>${allure-selenide.version}</version>
     </dependency>
 </dependencies>
+
 <build>
     <plugins>
         <plugin>
@@ -95,6 +105,5 @@
         </plugin>
     </plugins>
 </build>
-
 
 </project>

@@ -27,7 +27,8 @@ public class SettingTest extends BaseTest {
                 .waitTillOpened()
                 .openSetting()
                 .waitTillOpened()
-                .editProfile(accountBuilder);
+                .editProfile(accountBuilder)
+                        .saveEdit();
         settingPage.check("Country", "Belarus");
         settingPage.check("Gender", "Male");
     }
@@ -49,8 +50,47 @@ public class SettingTest extends BaseTest {
                 .waitTillOpened()
                 .openSetting()
                 .waitTillOpened()
-                .editSettings(userSettings);
+                .editSettings(userSettings)
+                        .saveEdit();
         settingPage.check("Primary Sport", "Swimming");
         settingPage.check("Time Display", "24 hour");
     }
+    @Test(testName = "Проверка перехода в настройки профиля",
+            description = "Проверка перехода в настройки профиля")
+    @Description("Проверка перехода в настройки профиля")
+    @Owner("Degtyarev Vlad")
+    public void checkOpenSettingPage(){
+        loginPage.openPage()
+                .login(user,password)
+                .waitTillOpened()
+                .openSetting()
+                .checkOpenedPage("Edit Profile");
+
+    }
+    @Test(testName = "Сохранения профиля с пустым именем",
+            description = "Проверка отоброжения ошибки при сохранении профиля с пустым именем ")
+    @Description("Проверка отоброжения ошибки при сохранении профиля с пустым именем")
+    @Owner("Degtyarev Vlad")
+    public void checkEditProfileWithEmptyName() {
+    Account accountBuilder = Account.builder()
+            .name(" ")
+            .sex("Male")
+            .country("Belarus")
+            .weight("70")
+            .typeWeight("kg")
+            .LName("Degtyarev")
+            .region("Vitsyebskaya voblasts")
+            .build();
+    loginPage.openPage()
+            .waitTillOpened()
+            .login(user, password)
+            .waitTillOpened()
+            .openSetting()
+            .waitTillOpened()
+            .editProfile(accountBuilder)
+            .saveEdit()
+            .checkErrorMassage("×\n" +
+                    "Please fix the following errors:\n" +
+                    "*Please enter a value for First Name.");
+}
 }

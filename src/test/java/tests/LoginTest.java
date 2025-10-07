@@ -2,7 +2,10 @@ package tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
     @Test(testName = "Проверка входа с позитивными даннами",
@@ -24,27 +27,26 @@ public class LoginTest extends BaseTest {
         loginPage.openPage()
                 .waitTillOpened()
                 .login("vrev@gmail.com", "test");
-        loginPage.checkErrorMessage("Invalid login credentials. Please try again.");
+        loginPage.getErrorMessageWithNegativeEmail("Invalid login credentials. Please try again.");
     }
 
-    @Test(testName = "Проверка входа с пустым email ",
-            description ="Проверка входа  в аккаунт с пустым email" )
-    @Description("Проверка входа  в аккаунт с пустым email")
-    @Owner("Degtyarev Vlad")
-    public void checkLoginWithEmptyLogin() {
-        loginPage.openPage()
-                .waitTillOpened()
-                .login("", password);
-        loginPage.checkEmailErrorMessage("Please enter your e-mail address.");
+    @DataProvider(name = "Проверка логина с негативными данными")
+    public Object[][] loginData() {
+        return new Object[][] {
+                {"test@gmail.com", "", "Please enter a password."},
+                {"test", "test", "Please enter a valid email address."},
+                {"", "password", "Please enter your e-mail address."},
+                {"test@gmail.com", "", "Please enter a password."}
+        };
     }
 
-    @Test(testName = "Проверка входа с пустым password ",
-            description ="Проверка входа  в аккаунт с пустым password" )
-    @Description("Проверка входа  в аккаунт с пустым password")
+    @Test(dataProvider = "Проверка логина с негативными данными")
+    @Description("Проверка входа  в аккаунт негативными даннами")
     @Owner("Degtyarev Vlad")
-    public void checkLoginWithEmptyPassword() {
+    public void paramNegativeTest(String user,String password,String expectedErrorMessage){
         loginPage.openPage();
-        loginPage.login(user, "");
-        loginPage.checkPasswordErrorMessage("Please enter a password.");
+        loginPage.login(user,password);
+        assertEquals(loginPage.checkErrorMessage(),expectedErrorMessage,"Сообщение об ошибки не соответсвует");
+
     }
 }
