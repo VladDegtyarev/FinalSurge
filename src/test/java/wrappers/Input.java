@@ -13,4 +13,8 @@ public class Input {
         $x(String.format("//label[text()='%s']/following-sibling::input[@type='text']", label)).setValue(text);
     }
 
+    public void writeCalculatorCaloric(String text) {
+        $x(String.format("//input[contains(@id,'%s')]", label)).setValue(text);
+    }
+
 }

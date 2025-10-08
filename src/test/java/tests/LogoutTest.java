@@ -11,9 +11,11 @@ public class LogoutTest extends BaseTest {
     @Owner("Degtyarev Vlad")
     public void checkLogout() {
         loginPage.openPage()
+                .isPageOpen()
                 .login(user, password)
-                .waitTillOpened()
+                .isPageOpen()
                 .clickLogout()
+                .isPageOpen()
                 .checkLogout("Account Logout");
     }
 }

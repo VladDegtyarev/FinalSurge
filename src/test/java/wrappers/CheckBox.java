@@ -12,7 +12,5 @@ public class CheckBox {
     public void select(String select) {
         $x(String.format("//input[contains(@name,'%s') " +
                 "and following-sibling::text()[normalize-space(.)='%s']]", label, select)).click();
-
     }
-
 }

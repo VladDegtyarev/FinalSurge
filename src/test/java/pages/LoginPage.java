@@ -24,13 +24,13 @@ public class LoginPage {
     }
 
     @Step("Страница Login открыта")
-    public LoginPage waitTillOpened() {
+    public LoginPage isPageOpen() {
         log.info("Page Login is open");
-        $x(USER_FIELD);
+        $x(USER_FIELD).shouldBe(visible);
         return this;
     }
 
-    @Step("Вход в аккаунт с именем пользователя:'{user}' и поролем: '{password}'")
+    @Step("Вход в аккаунт с именем пользователя:'{user}' и паролем: '{password}'")
     public CalendarPage login(String user, String password) {
         log.info("Log in with cred {}, {}", user, password);
         $x(USER_FIELD).setValue(user);

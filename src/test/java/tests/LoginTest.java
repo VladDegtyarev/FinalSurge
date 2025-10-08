@@ -8,24 +8,24 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
-    @Test(testName = "Проверка входа с позитивными даннами",
-            description = "Проверка входа  в аккаунт позитивными даннами")
-    @Description("Проверка входа  в аккаунт позитивными даннами")
+    @Test(testName = "Проверка входа с позитивными данными",
+            description = "Проверка входа  в аккаунт позитивными данными")
+    @Description("Проверка входа  в аккаунт позитивными данными")
     @Owner("Degtyarev Vlad")
     public void checkPositiveLogin() {
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
-                .waitTillOpened();
+                .isPageOpen();
     }
 
-    @Test(testName = "Проверка входа с негативными даннами",
-            description = "Проверка входа  в аккаунт негативными даннами")
-    @Description("Проверка входа  в аккаунт негативными даннами")
+    @Test(testName = "Проверка входа с негативными данными",
+            description = "Проверка входа  в аккаунт негативными данными")
+    @Description("Проверка входа  в аккаунт негативными данными")
     @Owner("Degtyarev Vlad")
     public void checkLoginWithNegativeCred() {
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login("vrev@gmail.com", "test");
         loginPage.getErrorMessageWithNegativeEmail("Invalid login credentials. Please try again.");
     }
@@ -44,8 +44,9 @@ public class LoginTest extends BaseTest {
     @Description("Проверка входа  в аккаунт негативными даннами")
     @Owner("Degtyarev Vlad")
     public void paramNegativeTest(String user, String password, String expectedErrorMessage) {
-        loginPage.openPage();
-        loginPage.login(user, password);
+        loginPage.openPage()
+                        .isPageOpen()
+                                .login(user, password);
         assertEquals(loginPage.checkErrorMessage(), expectedErrorMessage, "Сообщение об ошибки не соответсвует");
 
     }

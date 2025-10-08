@@ -7,9 +7,9 @@ import io.qameta.allure.Owner;
 import org.testng.annotations.Test;
 
 public class SettingTest extends BaseTest {
-    @Test(testName = "Проверка редактирования профеля",
-            description = "Проверка редактирования профеля пользователя")
-    @Description("Проверка редактирования профеля пользователя")
+    @Test(testName = "Проверка редактирования профиля",
+            description = "Проверка редактирования профиля пользователя")
+    @Description("Проверка редактирования профиля пользователя")
     @Owner("Degtyarev Vlad")
     public void checkEditProfile() {
         Account accountBuilder = Account.builder()
@@ -22,15 +22,15 @@ public class SettingTest extends BaseTest {
                 .region("Vitsyebskaya voblasts")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
-                .waitTillOpened()
+                .isPageOpen()
                 .openSetting()
-                .waitTillOpened()
+                .isPageOpen()
                 .editProfile(accountBuilder)
                 .saveEdit();
-        settingPage.check("Country", "Belarus");
-        settingPage.check("Gender", "Male");
+        settingPage.checkEdit("Country", "Belarus");
+        settingPage.checkEdit("Gender", "Male");
     }
 
     @Test(testName = "Проверка изменения настроек ",
@@ -45,15 +45,15 @@ public class SettingTest extends BaseTest {
                 .startWeek("Monday")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
-                .waitTillOpened()
+                .isPageOpen()
                 .openSetting()
-                .waitTillOpened()
+                .isPageOpen()
                 .editSettings(userSettings)
                 .saveEdit();
-        settingPage.check("Primary Sport", "Swimming");
-        settingPage.check("Time Display", "24 hour");
+        settingPage.checkEdit("Primary Sport", "Swimming");
+        settingPage.checkEdit("Time Display", "24 hour");
     }
 
     @Test(testName = "Проверка перехода в настройки профиля",
@@ -62,8 +62,9 @@ public class SettingTest extends BaseTest {
     @Owner("Degtyarev Vlad")
     public void checkOpenSettingPage() {
         loginPage.openPage()
+                .openPage()
                 .login(user, password)
-                .waitTillOpened()
+                .isPageOpen()
                 .openSetting()
                 .checkOpenedPage("Edit Profile");
 
@@ -84,11 +85,11 @@ public class SettingTest extends BaseTest {
                 .region("Vitsyebskaya voblasts")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
-                .waitTillOpened()
+                .isPageOpen()
                 .openSetting()
-                .waitTillOpened()
+                .isPageOpen()
                 .editProfile(accountBuilder)
                 .saveEdit()
                 .checkErrorMassage("×\n" +

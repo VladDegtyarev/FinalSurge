@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class CalendarTest extends BaseTest {
 
-    @Test(testName = "Создания тренировки",
+    @Test(testName = "Создание тренировки",
             description = "Проверка создания тренировки")
     @Description("Проверка создания тренировки")
     @Owner("Degtyarev Vlad")
@@ -20,8 +20,9 @@ public class CalendarTest extends BaseTest {
                 .distType("km")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
@@ -40,8 +41,9 @@ public class CalendarTest extends BaseTest {
                 .distType("km")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
@@ -63,8 +65,9 @@ public class CalendarTest extends BaseTest {
                 .distType("km")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
@@ -93,8 +96,9 @@ public class CalendarTest extends BaseTest {
                 .distType("km")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
@@ -108,12 +112,13 @@ public class CalendarTest extends BaseTest {
     }
 
     @Test(testName = "Смена месяца",
-            description = "Проверка Смены месяца")
-    @Description("Проверка Смены месяца")
+            description = "Проверка смены месяца")
+    @Description("Проверка смены месяца")
     public void checkMonthChange() {
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .selectMonth("Aug")
                 .checkSelectedMonth("August 2025");
     }
@@ -122,7 +127,7 @@ public class CalendarTest extends BaseTest {
             description = "Проверка отоброжения ошибки при создании быстрой тренировки с невыбранным активным спортом ")
     @Description("Проверка отоброжения ошибки при создании быстрой тренировки с невыбранным активным спортом ")
     @Owner("Degtyarev Vlad")
-    public void testcheckMoveWorkout() {
+    public void createQuickWorkoutWithNoActiveSport() {
         QuickWorkout quickWorkout = QuickWorkout.builder()
                 .date("7/10/2025")
                 .type("Select...")
@@ -131,8 +136,9 @@ public class CalendarTest extends BaseTest {
                 .distType("km")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()
@@ -145,7 +151,7 @@ public class CalendarTest extends BaseTest {
             description = "Проверка отоброжения ошибки при создании быстрой тренировки с пустым полем Date ")
     @Description("Проверка отоброжения ошибки при создании быстрой тренировки с пустым полем Date ")
     @Owner("Degtyarev Vlad")
-    public void testdatecheckMoveWorkout() {
+    public void createQuickWorkoutWithEmptyDate() {
         QuickWorkout quickWorkout = QuickWorkout.builder()
                 .date(" ")
                 .type("Swim")
@@ -154,8 +160,9 @@ public class CalendarTest extends BaseTest {
                 .distType("km")
                 .build();
         loginPage.openPage()
-                .waitTillOpened()
+                .isPageOpen()
                 .login(user, password)
+                .isPageOpen()
                 .openAddQuickWorkout()
                 .addWorkoutQuick(quickWorkout)
                 .save()

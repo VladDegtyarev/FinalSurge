@@ -9,6 +9,7 @@ import wrappers.CheckBox;
 import wrappers.Input;
 import wrappers.PickList;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.testng.Assert.assertEquals;
@@ -22,13 +23,13 @@ public class SettingPage {
     private final String ERROR_MASSAGE = "div.alert.alert-error";
 
     @Step("Страница Setting открыта")
-    public SettingPage waitTillOpened() {
+    public SettingPage isPageOpen() {
         log.info("Page setting is open");
-        $x(EDIT_PROFILE_BUTTON);
+        $x(EDIT_PROFILE_BUTTON).shouldBe(visible);
         return this;
     }
 
-    @Step("Редактирования профиля ")
+    @Step("Редактирование профиля ")
     public SettingPage editProfile(Account account) {
         log.info("Edit profile: {} ", account.getName());
         $x(EDIT_PROFILE_BUTTON).click();
@@ -49,7 +50,7 @@ public class SettingPage {
         return this;
     }
 
-    @Step("Изменения настроек профиля")
+    @Step("Изменение настроек профиля")
     public SettingPage editSettings(UserSettings userSettings) {
         log.info("Edit setting");
         $x(EDIT_SETTINGS_BUTTON).click();
@@ -60,7 +61,7 @@ public class SettingPage {
         return this;
     }
 
-    public void check(String edit, String expected) {
+    public void checkEdit(String edit, String expected) {
         SelenideElement element = $x(String.format(EDIT, edit));
         String fullText = element.text();
         String text = fullText.replace(edit + ":", "").trim();
@@ -74,6 +75,6 @@ public class SettingPage {
 
     public void checkErrorMassage(String error) {
         SelenideElement element = $(ERROR_MASSAGE);
-        assertEquals(element.getText(), error);
+        assertEquals(element.getText(), error,"Сообщение об ошибки не соответсвует");
     }
 }
