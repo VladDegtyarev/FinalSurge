@@ -32,7 +32,7 @@ public class BaseTest {
         Configuration.baseUrl = "https://log.finalsurge.com";
         Configuration.timeout = 40000;
         Configuration.clickViaJs = true;
-        //Configuration.headless = true;
+        Configuration.headless = true;
         Configuration.browserSize = "1600x900";
         loginPage = new LoginPage();
         settingPage = new SettingPage();
