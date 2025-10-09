@@ -61,20 +61,26 @@ public class SettingPage {
         return this;
     }
 
+    @Step("Проверка изменения настроек")
     public void checkEdit(String edit, String expected) {
+        log.info("Checking for changes to settings");
         SelenideElement element = $x(String.format(EDIT, edit));
         String fullText = element.text();
         String text = fullText.replace(edit + ":", "").trim();
         assertEquals(text, expected);
     }
 
+    @Step("Проверить открытие страницы настроек")
     public void checkOpenedPage(String value) {
+        log.info("Сheck opening the settings page");
         SelenideElement element = $x(EDIT_PROFILE_BUTTON);
         assertEquals(element.getText(), value);
     }
 
+    @Step("Проверка сообщения об ошибки")
     public void checkErrorMassage(String error) {
+        log.info("Checking the error message");
         SelenideElement element = $(ERROR_MASSAGE);
-        assertEquals(element.getText(), error,"Сообщение об ошибки не соответсвует");
+        assertEquals(element.getText(), error, "Сообщение об ошибки не соответсвует");
     }
 }

@@ -45,8 +45,8 @@ public class LoginTest extends BaseTest {
     @Owner("Degtyarev Vlad")
     public void paramNegativeTest(String user, String password, String expectedErrorMessage) {
         loginPage.openPage()
-                        .isPageOpen()
-                                .login(user, password);
+                .isPageOpen()
+                .login(user, password);
         assertEquals(loginPage.checkErrorMessage(), expectedErrorMessage, "Сообщение об ошибки не соответсвует");
 
     }

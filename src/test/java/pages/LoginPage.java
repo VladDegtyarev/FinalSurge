@@ -38,11 +38,15 @@ public class LoginPage {
         return new CalendarPage();
     }
 
+    @Step("Получение сообщение об ошибке с отрицательным адресом электронной почты")
     public void getErrorMessageWithNegativeEmail(String error) {
+        log.info("Get error message with negative Email");
         $x(ERROR_MASSAGE).shouldHave(Condition.text(error));
     }
 
+    @Step("Проверка сообщения об ошибки")
     public String checkErrorMessage() {
+        log.info("Checking the error message");
         SelenideElement error = $x(EMAIL_MASSAGE);
         error.shouldBe(visible);
         return error.getText();

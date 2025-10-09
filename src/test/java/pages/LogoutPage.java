@@ -19,7 +19,9 @@ public class LogoutPage {
         return this;
     }
 
+    @Step("Проверка выхода из аккаунта")
     public void checkLogout(String massage) {
+        log.info("Checking account logout");
         SelenideElement element = $x(LOGOUT_MASSAGE);
         assertEquals(element.getText(), massage);
     }

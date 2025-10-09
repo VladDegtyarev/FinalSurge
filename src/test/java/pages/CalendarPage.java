@@ -28,7 +28,9 @@ public class CalendarPage {
     private final String ERROR_MASSAGE = "div.alert.alert-error";
     private final String CALCULATOR_BUTTON = "//i[@class='icsw16-calculator']";
 
+    @Step("Проверка сообщения об ошибки")
     public void checkErrorMassage(String error) {
+        log.info("Checking the error message");
         SelenideElement element = $(ERROR_MASSAGE);
         assertEquals(element.getText(), error);
     }
@@ -44,7 +46,9 @@ public class CalendarPage {
         return this;
     }
 
+    @Step("Проверка выбора месяца")
     public CalendarPage checkSelectedMonth(String month) {
+        log.info("Checking the month selection");
         SelenideElement element = $x(CALENDAR_MONTH);
         assertEquals(element.getText(), month);
         return this;
@@ -113,17 +117,23 @@ public class CalendarPage {
         return this;
     }
 
+    @Step("Проверка удаления тренировки")
     public CalendarPage checkDeletedWorkout(String day, String workout) {
+        log.info("Checking  a workout  deleted");
         $x(String.format(CALENDAR_WORKOUT, day, workout)).shouldNot(visible);
         return this;
     }
 
+    @Step("Проверка создания тренировки")
     public CalendarPage checkCreateWorkout(String day, String workout) {
+        log.info("Checking the creation of a workout");
         $x(String.format(CALENDAR_WORKOUT, day, workout)).shouldBe(visible);
         return this;
     }
 
+    @Step("Проверка деталей тренировки")
     public CalendarPage checkWorkoutDetails(String day) {
+        log.info("Checking training details");
         SelenideElement element = $x(WORKOUT_DETAILS);
         assertEquals(element.getText(), day);
         return this;
